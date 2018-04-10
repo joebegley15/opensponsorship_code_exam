@@ -1,0 +1,19 @@
+{
+	"firstName":"Joe",
+	"lastName":"Begley",
+	"dob":"07301993",
+	"nationality":"USA",
+	"location":"New York",
+	"association":"MEAN Developers",
+	"team":"Free Agent",
+	"gender":"Male",
+	"sports":["skiing","running"],
+	"about":"24 year old developer.",
+	"interests":"All New England sports. Playing guitar.",
+	"charities":"Cans for Kids",
+	"social":"@bigjoebegs",
+	"pets":"3 dogs",
+	"drinks":true,
+	"married":false,
+	"profPicUrl":"N/A"
+}
