@@ -1,25 +1,82 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Angular QuickStart</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <base href="/">
-    <link rel="stylesheet" href="styles.css">
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Example - example-forms-simple-production</title>
+  
 
-    <!-- Polyfill(s) for older browsers -->
-    <script src="node_modules/core-js/client/shim.min.js"></script>
+  <script src="//code.angularjs.org/snapshot/angular.min.js"></script>
+  
 
-    <script src="node_modules/zone.js/dist/zone.js"></script>
-    <script src="node_modules/systemjs/dist/system.src.js"></script>
+  
+</head>
+<body ng-app="formExample">
+  <div ng-controller="ExampleController">
+    <form novalidate class="simple-form">
+      <label>First Name: <input type="text" ng-model="user.firstName" /></label><br>
+      <label>Last Name: <input type="text" ng-model="user.lastName" /></label><br>
+      <label>Date Of Birth: <input type="text" ng-model="user.dob" /></label>
+      <label>Nationality: <input type="text" ng-model="user.nationality" /></label>
+      <label>Location: <input type="text" ng-model="user.location" /></label>
+      <label>Association: <input type="text" ng-model="user.association" /></label>
+      <label>Team: <input type="text" ng-model="user.team" /></label>
+      <label>Sports: <input type="dropdown" ng-model="user.sports" /></label>
+      <label>About: <input type="text" ng-model="user.sports" /></label>
+      <input type="button" ng-click="reset()" value="Reset" />
+      <input type="submit" ng-click="update(user)" value="Save" />
+    </form>
+  <pre>user = {{user | json}}</pre>
+  <pre>master = {{master | json}}</pre>
+</div>
 
-    <script src="src/systemjs.config.js"></script>
-    <script>
-      System.import('src/main.js').catch(function(err){ console.error(err); });
-    </script>
-  </head>
+<script>
+  angular.module('formExample', [])
+    .controller('ExampleController', ['$scope', '$http', function($scope, $http) {
+      $scope.master = {};
+      
 
-  <body>
-    <my-app>Loading AppComponent content here ...</my-app>
-  </body>
+      $scope.update = function(user) {
+        $scope.master = angular.copy(user);
+        console.log($scope.master)
+        $http({
+          method: 'POST',
+          url: '/api/athlete',
+          headers: {
+             'Content-type': 'application/json'
+          },
+          data: $scope.master
+        }).then(function successCallback(response) {
+            console.log(response);
+        }, function errorCallback(response) {
+          console.log(response);
+          // called asynchronously if an error occurs
+          // or server returns response with an error status.
+        });
+      };
+
+      $scope.reset = function() {
+        $scope.user = angular.copy($scope.master);
+      };
+
+      $http({
+        method: 'GET',
+        url: '/api/athletes'
+      }).then(function successCallback(response) {
+          console.log(response);
+      }, function errorCallback(response) {
+        // called asynchronously if an error occurs
+        // or server returns response with an error status.
+      });
+
+      $scope.reset();
+
+    }]);
+</script>
+</body>
 </html>
+
+<!-- 
+Copyright 2018 Google Inc. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://angular.io/license
+-->

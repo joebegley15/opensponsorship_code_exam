@@ -15,7 +15,7 @@ router.get('/athletes', function(req,res,next){
 })
 
 //Get Single Athlete
-router.get('/athletes/:id', function(req,res,next){
+router.get('/athlete/:id', function(req,res,next){
 	db.athletes.findOne({_id: mongojs.ObjectId(req.params.id)},function(err,athlete){
 		if(err){
 			res.send(err);
@@ -27,7 +27,7 @@ router.get('/athletes/:id', function(req,res,next){
 // Register Athlete
 router.post('/athlete',function(req,res,next){
 	var athlete = req.body;
-	if(!athlete.firstName || (athlete.isDone + '')){
+	if(!athlete.firstName || !(athlete.isDone + '')){
 		res.status(400);
 		res.json({
 			"error" : "Incomplete or bad data."
@@ -44,41 +44,41 @@ router.post('/athlete',function(req,res,next){
 
 // Delete User
 
-// router.delete('/athletes/:id', function(req,res,next){
-// 	db.athletes.remove({_id: mongojs.ObjectId(req.params.id)},function(err,athlete){
-// 		if(err){
-// 			res.send(err);
-// 		}
-// 		res.json(athlete);
-// 	})
-// })
+router.delete('/athlete/:id', function(req,res,next){
+	db.athletes.remove({_id: mongojs.ObjectId(req.params.id)},function(err,athlete){
+		if(err){
+			res.send(err);
+		}
+		res.json(athlete);
+	})
+})
 
-// // Update User
+// Update User
 
-// router.put('/athletes/:id', function(req,res,next){
-// 	var task = req.body;
-// 	var info = ['firstName','lastName','dob','nationality','location','association','team','gender','sports','about','interests','charities','social','pets','drinks','married','profPicUrl'];
-// 	var updTask = {};
+router.put('/athletes/:id', function(req,res,next){
+	var task = req.body;
+	var info = ['firstName','lastName','dob','nationality','location','association','team','gender','sports','about','interests','charities','social','pets','drinks','married','profPicUrl'];
+	var updTask = {};
 
-// 	for (var i = 0; i < info.length; i++) {
-// 		if (task.info[i]) {
-// 			updTask.info[i] = task.info[i]; 
-// 		}
-// 	}
+	for (var i = 0; i < info.length; i++) {
+		if (task.info[i]) {
+			updTask.info[i] = task.info[i]; 
+		}
+	}
 
-// 	if(!updTask){
-// 		res.Status(400);
-// 		res.json({
-// 			'error':'Bad data'
-// 		})
-// 	} else {
-// 		db.athletes.update({_id: mongojs.ObjectId(req.params.id)},function(err,athlete){
-// 			if(err){
-// 				res.send(err);
-// 			}
-// 			res.json(athlete);
-// 		})
-// 	}
-// })
+	if(!updTask){
+		res.Status(400);
+		res.json({
+			'error':'Bad data'
+		})
+	} else {
+		db.athletes.update({_id: mongojs.ObjectId(req.params.id)},function(err,athlete){
+			if(err){
+				res.send(err);
+			}
+			res.json(athlete);
+		})
+	}
+})
 
 module.exports = router;
