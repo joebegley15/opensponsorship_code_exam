@@ -8,7 +8,37 @@
   <script src="//code.angularjs.org/snapshot/angular.min.js"></script>
   <link rel="stylesheet" type="text/html" href="main.css">
   
-
+  <style>
+@media(max-width: 820){ 
+  input[type=text] {
+    width: 60%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+  }
+}
+  input[type=text] {
+    width: 700px;
+  }
+  label {
+    width: 100%;
+    margin: 5px;
+  }
+  input[type=text] {
+    border: 2px solid blue;
+    border-radius: 4px;
+  }
+  button, input[type=submit] {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    padding: 20px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+  </style>
   
 </head>
 <body ng-app="formExample">
@@ -17,31 +47,32 @@
     <form novalidate class="simple-form">
      <div ng-switch="step">
         <div ng-switch-when="1">
-          <label>First Name: <input type="text" ng-model="user.firstName" /></label><br>
-          <label>Last Name: <input type="text" ng-model="user.lastName" /></label><br>
+          <label>First Name: <input type="text" ng-model="user.firstName" /></label>
+          <label>Last Name: <input type="text" ng-model="user.lastName" /></label>
           <label>Date Of Birth: <input type="text" ng-model="user.dob" /></label>
           <label>Nationality: <input type="text" ng-model="user.nationality" /></label>
           <label>Location: <input type="text" ng-model="user.location" /></label>
-          <button ng-click="setStep(2,user)"></button>
+          <button ng-click="setStep(2,user)">Next</button>
         </div>
         <div ng-switch-when="2">
           <label>Association: <input type="text" ng-model="user.association" /></label>
           <label>Team: <input type="text" ng-model="user.team" /></label>
-          <label>Sports: <input type="dropdown" ng-model="user.sports" /></label>
+          <label>Sports: <input type="text" ng-model="user.sports" /></label>
           <label>About: <input type="text" ng-model="user.about" /></label>
-          <button ng-click="setStep(3,user)"></button>
+          <button ng-click="setStep(3,user)">Next</button>
         </div>
         <div ng-switch-when="3">
           <label>Interests: <input type="text" ng-model="user.interests" /></label>
-          <label>Sports: <input type="dropdown" ng-model="user.charities" /></label>
+          <label>Sports: <input type="text" ng-model="user.charities" /></label>
           <label>Social Media: <input type="text" ng-model="user.social" /></label>
           <input type="button" ng-click="reset()" value="Reset" />
           <input type="submit" ng-click="setStep(4,user)" value="Save"/>
         </div>
+        <div ng-switch-when="4">
+          <h1>Your Application is now complete</h1>
+        </div>
    </div>
     </form>
-  <pre>user = {{user | json}}</pre>
-  <pre>master = {{master | json}}</pre>
 </div>
 
 <script>
