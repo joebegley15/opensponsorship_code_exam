@@ -2,7 +2,7 @@
 
 Github repo for my application for Open Sponsorship's code exam.
 
-The gitignore file here ignores the main node_modules file, as well as the node_modules in the client folder, as well as so NPM install is still neccesary.
+The gitignore file here ignores the main node_modules file, so NPM install is still neccesary.
 
 Server is housed in server.js.
 
