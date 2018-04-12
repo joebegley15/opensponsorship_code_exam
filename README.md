@@ -7,3 +7,6 @@ The gitignore file here ignores the main node_modules file, so NPM install is st
 Server is housed in server.js.
 
 Mongolab was used to house DB.
+
+
+To start the application, clone the repo. Once you have it, migrate into the root directory. Run 'NPM install'. Once all packages are downloaded, run 'node server.js'.
